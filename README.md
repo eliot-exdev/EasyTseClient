@@ -9,6 +9,8 @@ Supported TSE features:
 - CMake 3.18 (https://cmake.org)
 - Boost 1.74 (https://www.boost.org)
 
+Tested on MacOsX (arm64) and Ubuntu 21.10 (amd64).  
+
 # Build
 mkdir build  
 cd build  
