@@ -24,7 +24,7 @@ namespace exdev {
 
         size_t write(const char *buffer, size_t size);
 
-        template<uint64_t size>
+        template<size_t size>
         size_t write(const std::array<char, size> &array) {
             return write(&array[0], size);
         }
@@ -35,7 +35,7 @@ namespace exdev {
 
         size_t read(char *buffer, size_t size);
 
-        template<uint64_t size>
+        template<size_t size>
         size_t read(std::array<char, size> &array) {
             return read(&array[0], size);
         }
