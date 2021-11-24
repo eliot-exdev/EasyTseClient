@@ -6,8 +6,6 @@
 
 using namespace exdev;
 
-#define LINE_ENDING '\n'
-
 #define PING_RSP_OK "ping ok"
 #define PING_RSP_TSE_BUSY "TSE busy"
 
@@ -36,9 +34,9 @@ TseClient::RequestResult TseClient::ping() {
     }
 
     // write message
-    const auto msg = guid + "-D" + LINE_ENDING;
+    const auto msg = "D-" + guid;
     auto res = socket.write(msg);
-    if (res != msg.size()) {
+    if (res == 0) {
         return RequestResult::ERROR_SOCKET_WRITE;
     }
 
@@ -79,7 +77,7 @@ TseClient::RequestResult TseClient::startTransaction(StartTransactionResponse &r
     }
 
     // write message
-    const auto msg = guid + "-A" + LINE_ENDING;
+    const auto msg = "A-" + guid;
     auto res = socket.write(msg);
     if (res != msg.size()) {
         return RequestResult::ERROR_SOCKET_WRITE;

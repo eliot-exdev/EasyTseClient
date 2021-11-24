@@ -2,16 +2,41 @@
 
 #include <iostream>
 
-#define GUID "ABCD"
-#define HOST "localhost"
-#define PORT 4444
+static struct App {
+    std::string host;
+    uint16_t port;
+    std::string guid;
+} app;
+
+static void printUsage() {
+    std::cout << "test_tse <host> <port> <guid>" << std::endl;
+}
+
+static bool parseArgs(const int argc, char **argv) {
+    if (argc != 4) {
+        return false;
+    }
+    app.host = std::string{argv[1]};
+    app.port = atoi(argv[2]);
+    app.guid = std::string{argv[3]};
+    return true;
+}
 
 int main(int argc, char **argv) {
+    if (!parseArgs(argc, argv)) {
+        printUsage();
+        return 1;
+    } else {
+        std::cout << "host=" << app.host << std::endl;
+        std::cout << "port=" << app.port << std::endl;
+        std::cout << "guid=" << app.guid << std::endl;
+    }
+
     // init tse
     exdev::TseClient::init();
 
     // create tse client
-    exdev::TseClient tse{GUID, HOST, PORT};
+    exdev::TseClient tse{app.guid, app.host, app.port};
 
     try {
         // ping
